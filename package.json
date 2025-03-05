@@ -43,7 +43,7 @@
     "test": "vitest --watch false",
     "coverage": "vitest run --coverage",
     "prepublishOnly": "npm run compile && rc-np",
-    "lint": "eslint src",
+    "lint": "eslint src/ --ext .tsx,.ts",
     "tsc": "tsc -p tsconfig.json --noEmit",
     "now-build": "npm run docs:build",
     "prepare": "husky"
