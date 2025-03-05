@@ -29,8 +29,8 @@ jobs:
       - name: Install dependencies
         run: CI=true pnpm install
 
-      - name: Build project
-        run: pnpm build
+      - name: Compile project
+        run: pnpm run compile
 
       - name: Publish to GitHub Packages
         run: pnpm publish
