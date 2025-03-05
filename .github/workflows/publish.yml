@@ -29,10 +29,7 @@ jobs:
       - name: Install dependencies
         run: CI=true pnpm install
 
-      - name: Compile project
-        run: pnpm run compile
-
-      - name: Publish to GitHub Packages
+      - name: Compile & publish to GitHub Packages
         run: pnpm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
