@@ -30,6 +30,6 @@ jobs:
         run: CI=true pnpm install
 
       - name: Compile & publish to GitHub Packages
-        run: pnpm publish
+        run: pnpm publish --publish-branch update
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
