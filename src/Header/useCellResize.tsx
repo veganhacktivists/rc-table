@@ -1,6 +1,6 @@
 import TableContext from '../context/TableContext';
 import { useContext } from '@rc-component/context';
-import { useEvent } from 'rc-util';
+import { useEvent } from '@rc-component/util';
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 

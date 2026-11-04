@@ -25,10 +25,16 @@ const BodyLine = React.forwardRef<HTMLDivElement, BodyLineProps>((props, ref) =>
   const { data, index, className, rowKey, style, extra, getHeight, ...restProps } = props;
   const { record, indent, index: renderIndex } = data;
 
-  const { scrollX, flattenColumns, prefixCls, fixColumn, componentWidth } = useContext(
-    TableContext,
-    ['prefixCls', 'flattenColumns', 'fixColumn', 'componentWidth', 'scrollX'],
-  );
+  const { scrollX, flattenColumns, prefixCls, fixColumn, componentWidth, classNames, styles } =
+    useContext(TableContext, [
+      'prefixCls',
+      'flattenColumns',
+      'fixColumn',
+      'componentWidth',
+      'scrollX',
+      'classNames',
+      'styles',
+    ]);
   const { getComponent } = useContext(StaticContext, ['getComponent']);
 
   const rowInfo = useRowInfo(record, rowKey, index, indent);
@@ -37,13 +43,20 @@ const BodyLine = React.forwardRef<HTMLDivElement, BodyLineProps>((props, ref) =>
   const cellComponent = getComponent(['body', 'cell'], 'div');
 
   // ========================== Expand ==========================
-  const { rowSupportExpand, expanded, rowProps, expandedRowRender, expandedRowClassName } = rowInfo;
+  const {
+    rowSupportExpand,
+    expanded,
+    rowProps,
+    expandedRowRender,
+    expandedRowClassName,
+    forceRender,
+  } = rowInfo;
+
+  const expandedClsName = computedExpandedClassName(expandedRowClassName, record, index, indent);
 
   let expandRowNode: React.ReactElement<any>;
-  if (rowSupportExpand && expanded) {
+  if (!extra && rowSupportExpand && (forceRender || expanded)) {
     const expandContent = expandedRowRender(record, index, indent + 1, expanded);
-
-    const expandedClsName = computedExpandedClassName(expandedRowClassName, record, index, indent);
 
     let additionalProps: React.TdHTMLAttributes<HTMLElement> = {};
     if (fixColumn) {
@@ -63,6 +76,7 @@ const BodyLine = React.forwardRef<HTMLDivElement, BodyLineProps>((props, ref) =>
           `${prefixCls}-expanded-row-level-${indent + 1}`,
           expandedClsName,
         )}
+        style={{ display: expanded ? undefined : 'none' }}
       >
         <Cell
           component={cellComponent}
@@ -93,15 +107,18 @@ const BodyLine = React.forwardRef<HTMLDivElement, BodyLineProps>((props, ref) =>
       {...restProps}
       data-row-key={rowKey}
       ref={rowSupportExpand ? null : ref}
-      className={clsx(className, `${prefixCls}-row`, rowProps?.className, {
+      className={clsx(className, `${prefixCls}-row`, rowProps?.className, classNames?.body?.row, {
+        [expandedClsName]: indent >= 1,
         [`${prefixCls}-row-extra`]: extra,
       })}
-      style={{ ...rowStyle, ...rowProps?.style }}
+      style={{ ...rowStyle, ...rowProps?.style, ...styles?.body?.row }}
     >
       {flattenColumns.map((column, colIndex) => {
         return (
           <VirtualCell
             key={colIndex}
+            className={classNames?.body?.cell}
+            style={styles?.body?.cell}
             component={cellComponent}
             rowInfo={rowInfo}
             column={column}

@@ -24,14 +24,20 @@
  *  - All expanded props, move into expandable
  */
 
-import type { CompareProps } from '@rc-component/context/lib/Immutable';
 import { clsx } from 'clsx';
 import ResizeObserver from '@rc-component/resize-observer';
-import { getTargetScrollBarSize } from '@rc-component/util/lib/getScrollBarSize';
-import useEvent from '@rc-component/util/lib/hooks/useEvent';
-import pickAttrs from '@rc-component/util/lib/pickAttrs';
-import getValue from '@rc-component/util/lib/utils/get';
-import warning from '@rc-component/util/lib/warning';
+import {
+  getDOM,
+  get as getValue,
+  getTargetScrollBarSize,
+  isEqual,
+  isNonNullable,
+  isReactRenderable,
+  pickAttrs,
+  useEvent,
+  useLayoutEffect,
+  warning,
+} from '@rc-component/util';
 import * as React from 'react';
 import Body from './Body';
 import ColGroup from './ColGroup';
@@ -72,10 +78,12 @@ import Panel from './Panel';
 import StickyScrollBar from './stickyScrollBar';
 import Column from './sugar/Column';
 import ColumnGroup from './sugar/ColumnGroup';
-import { getColumnsKey, validateValue, validNumberValue } from './utils/valueUtil';
-import { getDOM } from '@rc-component/util/lib/Dom/findDOMNode';
-import isEqual from '@rc-component/util/lib/isEqual';
-import useLayoutEffect from '@rc-component/util/lib/hooks/useLayoutEffect';
+import { getColumnsKey, validNumberValue } from './utils/valueUtil';
+
+export type CompareProps<T extends React.ComponentType<any>> = (
+  prevProps: Readonly<React.ComponentProps<T>>,
+  nextProps: Readonly<React.ComponentProps<T>>,
+) => boolean;
 
 export const DEFAULT_PREFIX = 'rc-table';
 
@@ -88,8 +96,10 @@ const EMPTY_SCROLL_TARGET = {};
 export type SemanticName = 'section' | 'title' | 'footer' | 'content';
 export type ComponentsSemantic = 'wrapper' | 'cell' | 'row';
 
-export interface TableProps<RecordType = any>
-  extends Omit<LegacyExpandableProps<RecordType>, 'showExpandColumn'> {
+export interface TableProps<RecordType = any> extends Omit<
+  LegacyExpandableProps<RecordType>,
+  'showExpandColumn'
+> {
   prefixCls?: string;
   className?: string;
   style?: React.CSSProperties;
@@ -312,6 +322,7 @@ const Table = <RecordType extends DefaultRecordType>(
     mergedExpandIcon,
     mergedChildrenColumnName,
     onTriggerExpand,
+    expandAllInfo,
   ] = useExpand(props, mergedData, getRowKey);
 
   // ====================== Column ======================
@@ -329,6 +340,8 @@ const Table = <RecordType extends DefaultRecordType>(
       // https://github.com/ant-design/ant-design/issues/23894
       onTriggerExpand,
       expandIcon: mergedExpandIcon,
+      ExpandIcon: components?.ExpandIcon,
+      expandAllInfo,
       expandIconColumnIndex: expandableConfig.expandIconColumnIndex,
       direction,
       scrollWidth: useInternalHooks && tailor && typeof scrollX === 'number' ? scrollX : null,
@@ -355,7 +368,7 @@ const Table = <RecordType extends DefaultRecordType>(
       scrollTo: config => {
         if (scrollBodyRef.current instanceof HTMLElement) {
           // Native scroll
-          const { index, top, key, offset } = config;
+          const { index, top, key, offset, align = 'nearest' } = config;
 
           if (validNumberValue(top)) {
             // In top mode, offset is ignored
@@ -366,13 +379,10 @@ const Table = <RecordType extends DefaultRecordType>(
               `[data-row-key="${mergedKey}"]`,
             );
             if (targetElement) {
-              if (!offset) {
-                // No offset, use scrollIntoView for default behavior
-                targetElement.scrollIntoView();
-              } else {
-                // With offset, use element's offsetTop + offset
-                const elementTop = (targetElement as HTMLElement).offsetTop;
-                scrollBodyRef.current.scrollTo({ top: elementTop + offset });
+              targetElement.scrollIntoView({ block: align });
+              if (offset) {
+                const container = scrollBodyRef.current;
+                container.scrollTo({ top: container.scrollTop + offset });
               }
             }
           }
@@ -397,8 +407,8 @@ const Table = <RecordType extends DefaultRecordType>(
   const pureColWidths = colsKeys.map(columnKey => colsWidths.get(columnKey));
   const colWidths = React.useMemo(() => pureColWidths, [pureColWidths.join('_')]);
   const stickyOffsets = useStickyOffsets(colWidths, flattenColumns);
-  const fixHeader = scroll && validateValue(scroll.y);
-  const horizonScroll = (scroll && validateValue(mergedScrollX)) || Boolean(expandableConfig.fixed);
+  const fixHeader = scroll && isNonNullable(scroll.y);
+  const horizonScroll = (scroll && isNonNullable(mergedScrollX)) || Boolean(expandableConfig.fixed);
   const fixColumn = horizonScroll && flattenColumns.some(({ fixed }) => fixed);
 
   // Sticky
@@ -456,6 +466,9 @@ const Table = <RecordType extends DefaultRecordType>(
   }, []);
 
   const [setScrollTarget, getScrollTarget] = useTimeoutLock(null);
+  const [scrollRetryTimeoutMap] = React.useState(
+    () => new WeakMap<HTMLDivElement, ReturnType<typeof setTimeout>>(),
+  );
 
   function forceScroll(scrollLeft: number, target: HTMLDivElement | ((left: number) => void)) {
     if (!target) {
@@ -463,16 +476,26 @@ const Table = <RecordType extends DefaultRecordType>(
     }
     if (typeof target === 'function') {
       target(scrollLeft);
-    } else if (target.scrollLeft !== scrollLeft) {
+      return;
+    }
+
+    const scrollRetryTimeout = scrollRetryTimeoutMap.get(target);
+    if (scrollRetryTimeout) {
+      clearTimeout(scrollRetryTimeout);
+    }
+
+    if (target.scrollLeft !== scrollLeft) {
       target.scrollLeft = scrollLeft;
 
       // Delay to force scroll position if not sync
       // ref: https://github.com/ant-design/ant-design/issues/37179
-      if (target.scrollLeft !== scrollLeft) {
-        setTimeout(() => {
+      const retryTimeout = setTimeout(() => {
+        if (target.scrollLeft !== scrollLeft) {
           target.scrollLeft = scrollLeft;
-        }, 0);
-      }
+        }
+      }, 0);
+
+      scrollRetryTimeoutMap.set(target, retryTimeout);
     }
   }
 
@@ -662,10 +685,9 @@ const Table = <RecordType extends DefaultRecordType>(
     <ColGroup colWidths={flattenColumns.map(({ width }) => width)} columns={flattenColumns} />
   );
 
-  const captionElement =
-    caption !== null && caption !== undefined ? (
-      <caption className={`${prefixCls}-caption`}>{caption}</caption>
-    ) : undefined;
+  const captionElement = isNonNullable(caption) ? (
+    <caption className={`${prefixCls}-caption`}>{caption}</caption>
+  ) : undefined;
 
   const dataProps = pickAttrs(props, { data: true });
   const ariaProps = pickAttrs(props, { aria: true });
@@ -717,7 +739,7 @@ const Table = <RecordType extends DefaultRecordType>(
             {captionElement}
             {bodyColGroup}
             {bodyTable}
-            {!fixFooter && summaryNode && (
+            {!fixFooter && isReactRenderable(summaryNode) && (
               <Footer stickyOffsets={stickyOffsets} flattenColumns={flattenColumns}>
                 {summaryNode}
               </Footer>
@@ -800,7 +822,7 @@ const Table = <RecordType extends DefaultRecordType>(
           {bodyColGroup}
           {showHeader !== false && <Header {...headerProps} {...columnContext} />}
           {bodyTable}
-          {summaryNode && (
+          {isReactRenderable(summaryNode) && (
             <Footer stickyOffsets={stickyOffsets} flattenColumns={flattenColumns}>
               {summaryNode}
             </Footer>
@@ -901,6 +923,7 @@ const Table = <RecordType extends DefaultRecordType>(
       expandableType,
       expandRowByClick: expandableConfig.expandRowByClick,
       expandedRowRender: expandableConfig.expandedRowRender,
+      forceRender: expandableConfig.forceRender ?? false,
       expandedRowOffset: expandableConfig.expandedRowOffset,
       onTriggerExpand,
       expandIconColumnIndex: expandableConfig.expandIconColumnIndex,
@@ -962,6 +985,7 @@ const Table = <RecordType extends DefaultRecordType>(
       expandableType,
       expandableConfig.expandRowByClick,
       expandableConfig.expandedRowRender,
+      expandableConfig.forceRender,
       expandableConfig.expandedRowOffset,
       onTriggerExpand,
       expandableConfig.expandIconColumnIndex,

@@ -3,9 +3,20 @@ import VirtualList, { type ListProps, type ListRef } from '@rc-component/virtual
 import * as React from 'react';
 import TableContext, { responseImmutable } from '../context/TableContext';
 import useFlattenRecords, { type FlattenData } from '../hooks/useFlattenRecords';
-import type { ColumnType, OnCustomizeScroll, ScrollConfig } from '../interface';
+import type {
+  ColumnType,
+  OnCustomizeScroll,
+  ScrollConfig,
+  VirtualScrollConfig,
+} from '../interface';
 import BodyLine from './BodyLine';
 import { GridContext, StaticContext } from './context';
+
+const ALIGN_MAP: Record<string, 'top' | 'bottom' | 'auto'> = {
+  start: 'top',
+  end: 'bottom',
+  nearest: 'auto',
+};
 
 export interface GridProps<RecordType = any> {
   data: RecordType[];
@@ -79,15 +90,16 @@ const Grid = React.forwardRef<GridRef, GridProps>((props, ref) => {
   // =========================== Ref ============================
   React.useImperativeHandle(ref, () => {
     const obj = {
-      scrollTo: (config: ScrollConfig) => {
-        const { offset, ...restConfig } = config;
+      scrollTo: (config: VirtualScrollConfig) => {
+        const { align, offset, ...restConfig } = config;
 
-        // If offset is provided, force align to 'top' for consistent behavior
-        if (offset) {
-          listRef.current?.scrollTo({ ...restConfig, offset, align: 'top' });
-        } else {
-          listRef.current?.scrollTo(config);
-        }
+        const virtualAlign = ALIGN_MAP[align] ?? (offset ? 'top' : 'auto');
+
+        listRef.current?.scrollTo({
+          ...restConfig,
+          offset,
+          align: virtualAlign,
+        });
       },
       nativeElement: listRef.current?.nativeElement,
     } as unknown as GridRef;

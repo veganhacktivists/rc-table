@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Table, { INTERNAL_HOOKS } from 'rc-table';
-import type { ColumnType } from 'rc-table';
+import Table, { INTERNAL_HOOKS } from '@rc-component/table';
+import type { ColumnType } from '@rc-component/table';
 import '../../assets/index.less';
 import { useCheckbox } from './utils/useInput';
 
