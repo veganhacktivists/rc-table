@@ -1,8 +1,6 @@
 import { act, fireEvent, render } from '@testing-library/react';
-import { _rs as onEsResize } from '@rc-component/resize-observer/es/utils/observerUtil';
-import { _rs as onLibResize } from '@rc-component/resize-observer/lib/utils/observerUtil';
-import { spyElementPrototypes } from '@rc-component/util/lib/test/domHook';
-import { resetWarned } from '@rc-component/util/lib/warning';
+import { _rs as onResize } from '@rc-component/resize-observer';
+import { resetWarned, spyElementPrototypes } from '@rc-component/util';
 import React from 'react';
 import { VirtualTable, type Reference, type VirtualTableProps } from '../src';
 
@@ -89,8 +87,7 @@ describe('Table.Virtual', () => {
 
   function resize(target: HTMLElement) {
     act(() => {
-      onLibResize([{ target } as any]);
-      onEsResize([{ target } as any]);
+      onResize([{ target } as any]);
     });
   }
 
@@ -181,6 +178,152 @@ describe('Table.Virtual', () => {
         expect(expandedCells[1].textContent).toBe('name3');
         expect(container.querySelector('.rc-table-expanded-row')).toHaveClass('bamboo');
       });
+    });
+
+    it('force renders expanded rows before expansion', () => {
+      const expandedRowRender = vi.fn((record: { name: string }) => record.name);
+      const { container } = getTable({
+        data: [{ name: 'name0', age: 0, address: 'address0' }],
+        expandable: {
+          expandedRowRender,
+          forceRender: true,
+        },
+      });
+
+      expect(expandedRowRender).toHaveBeenCalledWith(
+        { name: 'name0', age: 0, address: 'address0' },
+        0,
+        1,
+        false,
+      );
+      expect(container.querySelector('.rc-table-expanded-row')).toHaveStyle({ display: 'none' });
+
+      fireEvent.click(container.querySelector('.rc-table-row-expand-icon')!);
+
+      expect(container.querySelector('.rc-table-expanded-row')).not.toHaveStyle({
+        display: 'none',
+      });
+
+      fireEvent.click(container.querySelector('.rc-table-row-expand-icon')!);
+
+      expect(container.querySelector('.rc-table-expanded-row')).toHaveStyle({
+        display: 'none',
+      });
+    });
+
+    it('keeps force-rendered expanded content mounted across expand and collapse', () => {
+      const onMount = vi.fn();
+      const onUnmount = vi.fn();
+
+      class StatefulContent extends React.Component<unknown, { count: number }> {
+        state = { count: 0 };
+
+        componentDidMount() {
+          onMount();
+        }
+
+        componentWillUnmount() {
+          onUnmount();
+        }
+
+        render() {
+          return (
+            <button
+              type="button"
+              className="stateful-expanded-content"
+              onClick={() => this.setState(({ count }) => ({ count: count + 1 }))}
+            >
+              {this.state.count}
+            </button>
+          );
+        }
+      }
+
+      const { container } = getTable({
+        data: [{ name: 'name0', age: 0, address: 'address0' }],
+        expandable: {
+          expandedRowRender: () => <StatefulContent />,
+          forceRender: true,
+        },
+      });
+
+      const expandIcon = container.querySelector('.rc-table-row-expand-icon')!;
+      const content = container.querySelector('.stateful-expanded-content')!;
+
+      expect(onMount).toHaveBeenCalledTimes(1);
+      expect(onUnmount).not.toHaveBeenCalled();
+
+      fireEvent.click(expandIcon);
+      fireEvent.click(content);
+      expect(content).toHaveTextContent('1');
+
+      fireEvent.click(expandIcon);
+      expect(container.querySelector('.stateful-expanded-content')).toBe(content);
+      expect(onUnmount).not.toHaveBeenCalled();
+
+      fireEvent.click(expandIcon);
+      expect(container.querySelector('.stateful-expanded-content')).toBe(content);
+      expect(content).toHaveTextContent('1');
+      expect(onMount).toHaveBeenCalledTimes(1);
+      expect(onUnmount).not.toHaveBeenCalled();
+    });
+
+    it('does not duplicate force-rendered content for rowSpan overlay lines', () => {
+      const expandedRowRender = vi.fn((record: { name: string }) => (
+        <span data-expanded-record={record.name}>{record.name}</span>
+      ));
+      const data = [
+        { name: 'name0', age: 0, address: 'address0' },
+        { name: 'name1', age: 1, address: 'address1' },
+      ];
+      const { container } = getTable({
+        data,
+        columns: [
+          {
+            dataIndex: 'name',
+            onCell: (_, index) => ({
+              rowSpan: index === 0 ? 2 : 0,
+            }),
+          },
+        ],
+        expandable: {
+          expandedRowRender,
+          forceRender: true,
+        },
+      });
+
+      expect(container.querySelector('.rc-table-row-extra')).toBeTruthy();
+      expect(expandedRowRender).toHaveBeenCalledTimes(2);
+      expect(expandedRowRender).toHaveBeenNthCalledWith(1, data[0], 0, 1, false);
+      expect(expandedRowRender).toHaveBeenNthCalledWith(2, data[1], 1, 1, false);
+      expect(container.querySelectorAll('[data-expanded-record="name0"]')).toHaveLength(1);
+      expect(container.querySelectorAll('[data-expanded-record="name1"]')).toHaveLength(1);
+    });
+
+    it('applies expanded row class to tree rows', () => {
+      const { container } = getTable({
+        data: [
+          {
+            name: 'parent',
+            age: 0,
+            address: 'address0',
+            children: [
+              {
+                name: 'child',
+                age: 1,
+                address: 'address1',
+              },
+            ],
+          },
+        ],
+        expandable: {
+          expandedRowKeys: ['parent'],
+          expandedRowClassName: 'bamboo',
+          expandIcon: () => <span className="custom-expand-icon" />,
+        },
+      });
+
+      expect(container.querySelector('[data-row-key="child"]')).toHaveClass('bamboo');
     });
 
     it('fixed', () => {
@@ -373,6 +516,7 @@ describe('Table.Virtual', () => {
 
     expect(global.scrollToConfig).toEqual({
       index: 99,
+      align: 'auto',
     });
   });
 
@@ -421,6 +565,31 @@ describe('Table.Virtual', () => {
       offset: 30,
       align: 'top',
     });
+  });
+
+  it('scrollTo with align should pass', async () => {
+    const tblRef = React.createRef<Reference>();
+    getTable({ ref: tblRef });
+
+    // align start -> top
+    tblRef.current.scrollTo({ index: 50, align: 'start' });
+    await waitFakeTimer();
+    expect(global.scrollToConfig).toEqual({ index: 50, align: 'top' });
+
+    // align end -> bottom
+    tblRef.current.scrollTo({ index: 50, align: 'end' });
+    await waitFakeTimer();
+    expect(global.scrollToConfig).toEqual({ index: 50, align: 'bottom' });
+
+    // align nearest -> auto
+    tblRef.current.scrollTo({ index: 50, align: 'nearest' });
+    await waitFakeTimer();
+    expect(global.scrollToConfig).toEqual({ index: 50, align: 'auto' });
+
+    // offset + align
+    tblRef.current.scrollTo({ index: 50, offset: 20, align: 'end' });
+    await waitFakeTimer();
+    expect(global.scrollToConfig).toEqual({ index: 50, offset: 20, align: 'bottom' });
   });
 
   describe('auto width', () => {

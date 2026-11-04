@@ -41,7 +41,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
             <th
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
               scope="col"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               title1
             </th>
@@ -114,7 +114,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
             <th
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
               scope="col"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             >
               title12
             </th>
@@ -126,7 +126,8 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
           <tr
             aria-hidden="true"
             class="rc-table-measure-row"
-            style="height: 0px;"
+            inert=""
+            style="height: 0px; visibility: hidden;"
           >
             <td
               style="padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-bottom: 0px; height: 0px;"
@@ -243,7 +244,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               123
             </td>
@@ -305,7 +306,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
             </td>
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             >
               xxxxxxxx
             </td>
@@ -316,7 +317,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               cdd
             </td>
@@ -378,7 +379,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
             </td>
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             >
               edd12221
             </td>
@@ -389,7 +390,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -437,7 +438,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -446,7 +447,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -494,7 +495,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -503,7 +504,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -551,7 +552,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -560,7 +561,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -608,7 +609,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -617,7 +618,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -665,7 +666,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -674,7 +675,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -722,7 +723,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -731,7 +732,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -779,7 +780,7 @@ exports[`Table.FixedColumn > fixed column renders correctly RTL 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
         </tbody>
@@ -832,7 +833,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
             <th
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
               scope="col"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               title1
             </th>
@@ -905,7 +906,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
             <th
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
               scope="col"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             >
               title12
             </th>
@@ -917,7 +918,8 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
           <tr
             aria-hidden="true"
             class="rc-table-measure-row"
-            style="height: 0px;"
+            inert=""
+            style="height: 0px; visibility: hidden;"
           >
             <td
               style="padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-bottom: 0px; height: 0px;"
@@ -1034,7 +1036,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               123
             </td>
@@ -1096,7 +1098,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
             </td>
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             >
               xxxxxxxx
             </td>
@@ -1107,7 +1109,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               cdd
             </td>
@@ -1169,7 +1171,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
             </td>
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             >
               edd12221
             </td>
@@ -1180,7 +1182,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -1228,7 +1230,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -1237,7 +1239,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -1285,7 +1287,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -1294,7 +1296,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -1342,7 +1344,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -1351,7 +1353,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -1399,7 +1401,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -1408,7 +1410,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -1456,7 +1458,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -1465,7 +1467,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -1513,7 +1515,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -1522,7 +1524,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -1570,7 +1572,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
         </tbody>
@@ -1621,7 +1623,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - without data 1`] = `
             <th
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
               scope="col"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               title1
             </th>
@@ -1694,7 +1696,7 @@ exports[`Table.FixedColumn > renders correctly > scrollX - without data 1`] = `
             <th
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
               scope="col"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             >
               title12
             </th>
@@ -1706,7 +1708,8 @@ exports[`Table.FixedColumn > renders correctly > scrollX - without data 1`] = `
           <tr
             aria-hidden="true"
             class="rc-table-measure-row"
-            style="height: 0px;"
+            inert=""
+            style="height: 0px; visibility: hidden;"
           >
             <td
               style="padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-bottom: 0px; height: 0px;"
@@ -1901,7 +1904,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
             <th
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
               scope="col"
-              style="inset-inline-start: 0; --z-offset: 26; --z-offset-reverse: 13;"
+              style="inset-inline-start: 0px; --z-offset: 26; --z-offset-reverse: 13;"
             >
               title1
             </th>
@@ -1980,7 +1983,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
             </th>
             <th
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-scrollbar"
-              style="inset-inline-end: 0; --z-offset: 12; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 12; --z-offset-reverse: 1;"
             />
           </tr>
         </thead>
@@ -2019,7 +2022,8 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
           <tr
             aria-hidden="true"
             class="rc-table-measure-row"
-            style="height: 0px;"
+            inert=""
+            style="height: 0px; visibility: hidden;"
           >
             <td
               style="padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-bottom: 0px; height: 0px;"
@@ -2136,7 +2140,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               123
             </td>
@@ -2198,7 +2202,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
             </td>
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             >
               xxxxxxxx
             </td>
@@ -2209,7 +2213,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               cdd
             </td>
@@ -2271,7 +2275,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
             </td>
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             >
               edd12221
             </td>
@@ -2282,7 +2286,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -2330,7 +2334,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -2339,7 +2343,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -2387,7 +2391,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -2396,7 +2400,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -2444,7 +2448,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -2453,7 +2457,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -2501,7 +2505,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -2510,7 +2514,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -2558,7 +2562,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -2567,7 +2571,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -2615,7 +2619,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
           <tr
@@ -2624,7 +2628,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
           >
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
-              style="inset-inline-start: 0; --z-offset: 24; --z-offset-reverse: 12;"
+              style="inset-inline-start: 0px; --z-offset: 24; --z-offset-reverse: 12;"
             >
               133
             </td>
@@ -2672,7 +2676,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - with data 1`] = `
             />
             <td
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-fix-end-shadow"
-              style="inset-inline-end: 0; --z-offset: 11; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 11; --z-offset-reverse: 1;"
             />
           </tr>
         </tbody>
@@ -2723,7 +2727,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - without data 1`] = `
             <th
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-start"
               scope="col"
-              style="inset-inline-start: 0; --z-offset: 26; --z-offset-reverse: 13;"
+              style="inset-inline-start: 0px; --z-offset: 26; --z-offset-reverse: 13;"
             >
               title1
             </th>
@@ -2802,7 +2806,7 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - without data 1`] = `
             </th>
             <th
               class="rc-table-cell rc-table-cell-fix rc-table-cell-fix-end rc-table-cell-scrollbar"
-              style="inset-inline-end: 0; --z-offset: 12; --z-offset-reverse: 1;"
+              style="inset-inline-end: 0px; --z-offset: 12; --z-offset-reverse: 1;"
             />
           </tr>
         </thead>
@@ -2841,7 +2845,8 @@ exports[`Table.FixedColumn > renders correctly > scrollXY - without data 1`] = `
           <tr
             aria-hidden="true"
             class="rc-table-measure-row"
-            style="height: 0px;"
+            inert=""
+            style="height: 0px; visibility: hidden;"
           >
             <td
               style="padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-bottom: 0px; height: 0px;"

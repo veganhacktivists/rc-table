@@ -1,9 +1,9 @@
 import React from 'react';
-import Menu, { Item, Divider } from 'rc-menu';
-import DropDown from 'rc-dropdown';
-import 'rc-dropdown/assets/index.css';
-import 'rc-menu/assets/index.css';
-import Table from 'rc-table';
+import Menu, { Item, Divider } from '@rc-component/menu';
+import DropDown from '@rc-component/dropdown';
+import '@rc-component/dropdown/assets/index.css';
+import '@rc-component/menu/assets/index.css';
+import Table from '@rc-component/table';
 import '../../assets/index.less';
 
 const data = [];
@@ -18,13 +18,13 @@ for (let i = 0; i < 10; i += 1) {
 
 class Demo extends React.Component {
   state = {
-    visible: false,
+    open: false,
   };
 
   filters = [];
 
-  handleVisibleChange = visible => {
-    this.setState({ visible });
+  handleOpenChange = open => {
+    this.setState({ open });
   };
 
   handleSelect = selected => {
@@ -41,7 +41,7 @@ class Demo extends React.Component {
   confirmFilter = () => {
     console.log(this.filters.join(','));
     this.setState({
-      visible: false,
+      open: false,
     });
   };
 
@@ -80,8 +80,8 @@ class Demo extends React.Component {
             title1
             <DropDown
               trigger={['click']}
-              onVisibleChange={this.handleVisibleChange}
-              visible={this.state.visible}
+              onOpenChange={this.handleOpenChange}
+              open={this.state.open}
               overlay={menu}
             >
               <a href="#">filter</a>

@@ -40,9 +40,15 @@ export type ScrollConfig = {
    * Additional offset in pixels to apply to the scroll position.
    * Only effective when using `key` or `index` mode.
    * Ignored when using `top` mode.
-   * When offset is set, the target element will always be aligned to the top of the container.
+   * In `key` / `index` mode, `offset` is added to the position resolved by `align`.
    */
   offset?: number;
+
+  align?: ScrollLogicalPosition;
+};
+
+export type VirtualScrollConfig = ScrollConfig & {
+  align?: Exclude<ScrollLogicalPosition, 'center'>;
 };
 
 export type Reference = {
@@ -84,10 +90,7 @@ export type Direction = 'ltr' | 'rtl';
 export type SpecialString<T> = T | (string & NonNullable<unknown>);
 
 export type DataIndex<T = any> =
-  | DeepNamePath<T>
-  | SpecialString<T>
-  | number
-  | (SpecialString<T> | number)[];
+  DeepNamePath<T> | SpecialString<T> | number | (SpecialString<T> | number)[];
 
 export type CellEllipsisType = { showTitle?: boolean } | boolean;
 
@@ -134,8 +137,7 @@ export interface ColumnType<RecordType> extends ColumnSharedType<RecordType> {
 }
 
 export type ColumnsType<RecordType = unknown> = readonly (
-  | ColumnGroupType<RecordType>
-  | ColumnType<RecordType>
+  ColumnGroupType<RecordType> | ColumnType<RecordType>
 )[];
 
 export type GetRowKey<RecordType> = (record: RecordType, index?: number) => Key;
@@ -177,6 +179,7 @@ export type CustomizeScrollBody<RecordType> = (
 ) => React.ReactNode;
 
 export interface TableComponents<RecordType> {
+  ExpandIcon?: ExpandIconComponent<RecordType>;
   table?: CustomizeComponent;
   header?: {
     table?: CustomizeComponent;
@@ -210,7 +213,7 @@ export interface LegacyExpandableProps<RecordType> {
   expandedRowRender?: ExpandedRowRender<RecordType>;
   /** @deprecated Use `expandable.expandRowByClick` instead */
   expandRowByClick?: boolean;
-  /** @deprecated Use `expandable.expandIcon` instead */
+  /** @deprecated Use `components.ExpandIcon` instead */
   expandIcon?: RenderExpandIcon<RecordType>;
   /** @deprecated Use `expandable.onExpand` instead */
   onExpand?: (expanded: boolean, record: RecordType) => void;
@@ -248,20 +251,49 @@ export type RenderExpandIcon<RecordType> = (
   props: RenderExpandIconProps<RecordType>,
 ) => React.ReactNode;
 
+export type ExpandIconProps<RecordType> = {
+  prefixCls: string;
+  expanded: boolean;
+  expandable: boolean;
+  onClick: React.MouseEventHandler<HTMLElement>;
+} & (
+  | {
+      type: 'row';
+      record: RecordType;
+    }
+  | {
+      type: 'all';
+      record?: never;
+    }
+);
+
+export type ExpandIconComponent<RecordType> = React.ComponentType<ExpandIconProps<RecordType>>;
+
+export interface ExpandColumnTitleProps {
+  expandIcon: React.ReactNode;
+}
+
+export type ExpandColumnTitle =
+  React.ReactNode | ((props: ExpandColumnTitleProps) => React.ReactNode);
+
 export interface ExpandableConfig<RecordType> {
   expandedRowKeys?: readonly Key[];
   defaultExpandedRowKeys?: readonly Key[];
   expandedRowRender?: ExpandedRowRender<RecordType>;
-  columnTitle?: React.ReactNode;
+  forceRender?: boolean;
+  columnTitle?: ExpandColumnTitle;
   expandRowByClick?: boolean;
+  /** @deprecated Please use `components.ExpandIcon` instead. This only customizes row icons. */
   expandIcon?: RenderExpandIcon<RecordType>;
   onExpand?: (expanded: boolean, record: RecordType) => void;
+  onExpandAll?: (expanded: boolean) => void;
   onExpandedRowsChange?: (expandedKeys: readonly Key[]) => void;
   defaultExpandAllRows?: boolean;
   indentSize?: number;
   /** @deprecated Please use `EXPAND_COLUMN` in `columns` directly */
   expandIconColumnIndex?: number;
   showExpandColumn?: boolean;
+  showExpandAll?: boolean;
   expandedRowClassName?: string | RowClassName<RecordType>;
   childrenColumnName?: string;
   rowExpandable?: (record: RecordType) => boolean;
